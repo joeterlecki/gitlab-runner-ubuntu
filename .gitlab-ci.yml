@@ -1,0 +1,7 @@
+stages:
+  - test
+
+build:
+  stage: test 
+  script:
+    - echo "lets do this" 
