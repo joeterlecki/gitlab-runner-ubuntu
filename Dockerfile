@@ -1,10 +1,15 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
-RUN apt-get update && apt-get upgrade && apt-get install -y \
-    wget \
+LABEL maintainer="joe.terlecki@devinitly.com"
+LABEL version="0.1"
+LABEL description="This docker image is containerizes a gitlab runner on ubuntu for ecs"
+
+# ARG DEBIAN_FRONTEND=noninteractive
+ENV TOKEN DbNqKfSJJhss39PyFFC9 
+
+RUN apt update && apt upgrade -y && apt install wget -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/
 
-# Install GitLab-Runner 
 RUN wget -O /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 \ 
     && chmod +x /usr/local/bin/gitlab-runner \ 
     && useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash \ 
